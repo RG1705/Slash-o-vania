@@ -3,7 +3,7 @@ PImage town2Sprite;
 PImage backgroundSprite;
 PImage moonSprite;
 
-
+PFont gothicFont;
 
 int winCounter;
 int killCounter;
@@ -119,6 +119,8 @@ void setup()
   town1Sprite = loadImage("rowofhousesfront1.png");
   town2Sprite = loadImage("rowofhousesback1.png");
   moonSprite = loadImage("gamemoon1.png");
+    gothicFont = loadFont("OldEnglishTextMT-48.vlw");//the counter text font
+  textFont(gothicFont);
 }
 
 void draw()
@@ -131,6 +133,12 @@ void draw()
   image(town2Sprite,0,700,900,200);
   rect(platform1X,platform1Y,200,50);
   rect(platform2X,platform2Y,200,50);
+    fill(255, 30, 40);
+  textSize(30);
+  textAlign(CENTER);
+  int center=900/2;
+  text("Foes Slain:"+killCounter, center, 65);
+
   
   int seconds1 = (totaltimeDelay1 - frameCount)/rate;
   int seconds2 = (totaltimeDelay2 - frameCount)/rate;
