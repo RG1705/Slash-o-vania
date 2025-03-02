@@ -2,6 +2,9 @@ PImage town1Sprite;
 PImage town2Sprite;
 PImage backgroundSprite;
 PImage moonSprite;
+PImage platL;
+PImage platR;
+PImage swordCursor;
 
 PFont gothicFont;
 
@@ -119,6 +122,9 @@ void setup()
   town1Sprite = loadImage("rowofhousesfront1.png");
   town2Sprite = loadImage("rowofhousesback1.png");
   moonSprite = loadImage("gamemoon1.png");
+  platL =loadImage("platformL.png");
+  platR = loadImage("platformR.png");
+  swordCursor =loadImage("swordcursor1.png");
     gothicFont = loadFont("OldEnglishTextMT-48.vlw");//the counter text font
   textFont(gothicFont);
 }
@@ -130,10 +136,14 @@ void draw()
   noCursor();
   image(backgroundSprite,0,0,900,900);
   image(moonSprite,370,90,150,150);
+  image(swordCursor, mouseX, mouseY);
   image(town2Sprite,0,700,900,200);
+  fill(50);
   rect(platform1X,platform1Y,200,50);
   rect(platform2X,platform2Y,200,50);
-    fill(255, 30, 40);
+  image(platR,700,90); //adds overlay platform on right
+  image(platL,0,90); //adds overlay platform on left
+    fill(255, 30, 40); //sets text color
   textSize(30);
   textAlign(CENTER);
   int center=900/2;
@@ -369,6 +379,5 @@ float distanceSword(int x1, int y1, int x2, int y2)
   int YDist = abs(y1-y2);
   
   return sqrt((XDist*XDist)+(YDist * YDist));
-  
   
 }
