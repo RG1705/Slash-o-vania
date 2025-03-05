@@ -10,17 +10,18 @@ PImage swordCursor;
 
 PFont gothicFont;
 
-int winCounter;
-int killCounter;
-int loseCounter;
-int deathcounter;
+int winCounter;  //Total amount of kills to win
+int killCounter; //amount of creatures killed
+int loseCounter; //Total amount of creatures that need to land for a loss
+int deathcounter; //How many creatures have landed
 
 
-int playerX;
-int playerY;
-int playerSize;
-int swordDistance = 20;
+int playerX; //player's X position
+int playerY;//player's Y position
+int playerSize; //Player's size
+int swordDistance = 20; //Minimum distance for sword to hit
 
+//Original X and Y positions of each creature
 int creature1XOrigin = -10;
 int creature2XOrigin = -10;
 int creature3XOrigin = -10;
@@ -39,6 +40,8 @@ int creature6YOrigin = -10;
 int creature7YOrigin = 70;
 int creature8YOrigin = 70;
 int creature9YOrigin = 70;
+
+//Current positions of each creatures
 int creature1X = -10;
 int creature2X = -10;
 int creature3X = -10;
@@ -59,15 +62,18 @@ int creature8Y = 70;
 int creature9Y = 70;
 int creatureSize = 50;
 
-
+//minimum distance for platforms to be considered collided
 int minPlatformDistance1 = 200;
 int minPlatformDistance2 = 200;
+
+//X and Y values of platforms
 int platform1X = 0;
 int platform2X = 700;
 int platform1Y = 90;
 int platform2Y = 90;
 
-int timeDelay1 = (int)random(2,6);
+//Amount of seconds until a creature spawns
+int timeDelay1 = (int)random(2,20);
 int timeDelay2 = (int)random(2,20);
 int timeDelay3 = (int)random(2,20);
 int timeDelay4 = (int)random(2,20);
@@ -77,8 +83,10 @@ int timeDelay7 = (int)random(2,20);
 int timeDelay8 = (int)random(2,20);
 int timeDelay9 = (int)random(2,20);
 
+//framerate
 int rate = 60;
 
+//Amount of frames until a creature spawns
 int remainingtimeDelay1 = timeDelay1 * rate;
 int remainingtimeDelay2 = timeDelay2 * rate;
 int remainingtimeDelay3 = timeDelay3 * rate;
@@ -89,18 +97,8 @@ int remainingtimeDelay7 = timeDelay7 * rate;
 int remainingtimeDelay8 = timeDelay8 * rate;
 int remainingtimeDelay9 = timeDelay9 * rate;
 
-int seconds1;
-int seconds2;
-int seconds3;
-int seconds4;
-int seconds5;
-int seconds6;
-int seconds7;
-int seconds8;
-int seconds9;
 
-
-
+//Speed and direction the creatures are going
 float creature1VelocityX;
 float creature1VelocityY;
 float creature2VelocityX;
@@ -119,27 +117,12 @@ float creature8VelocityX;
 float creature8VelocityY;
 float creature9VelocityX;
 float creature9VelocityY;
-float creature1VelocityXFall = random(1,3);
-float creature1VelocityYFall = random(2,3);
-float creature2VelocityXFall = random(1,3);
-float creature2VelocityYFall = random(2,3);
-float creature3VelocityXFall = random(1,3);
-float creature3VelocityYFall = random(2,3);
-float creature4VelocityXFall = random(-2,2);
-float creature4VelocityYFall = random(2,3);
-float creature5VelocityXFall = random(-2,2);
-float creature5VelocityYFall = random(2,3);
-float creature6VelocityXFall = random(-2,2);
-float creature6VelocityYFall = random(2,3);
-float creature7VelocityXFall = random(1,3);
-float creature7VelocityYFall = random(2,3);
-float creature8VelocityXFall = random(1,3);
-float creature8VelocityYFall = random(2,3);
-float creature9VelocityXFall = random(1,3);
-float creature9VelocityYFall = random(2,3);
 
-boolean Won;
-boolean Lost;
+
+boolean Won; //Whether or not the player wins the game
+boolean Lost; //Whether or not the player loses the game
+
+//Determines whether or not the creatures reset(When they land)
 boolean timeReset1;
 boolean timeReset2;
 boolean timeReset3;
@@ -150,6 +133,7 @@ boolean timeReset7;
 boolean timeReset8;
 boolean timeReset9;
 
+//Determines if a random velocity shold be retrieved
 boolean randomVelocityLeft1;
 boolean randomVelocityLeft2;
 boolean randomVelocityLeft3;
@@ -200,6 +184,7 @@ void draw()
   int center=900/2;
   text("Foes Slain:"+killCounter, center, 65);
   
+ //Makes the timers for each creature decrease every frame
   remainingtimeDelay1--;
   remainingtimeDelay2--;
   remainingtimeDelay3--;
@@ -210,15 +195,14 @@ void draw()
   remainingtimeDelay8--;
   remainingtimeDelay9--;
  
-  
-  println(creature1Y);
-  
-  
+  //N = respective creature number
+  //After remainingtimeDelayN is 0 or below, creature N's function will activate
   if (remainingtimeDelay1 <= 0){
     
-    creature1(creature1X,creature1Y,creatureSize);
+    creature1(creature1X,creature1Y,creatureSize); //CreatureN function
     
     
+    //If the creature reaches the ground, time Reset is true
     if (creature1Y > height + 10){
      
  
@@ -231,17 +215,17 @@ void draw()
      
   }
   
-  
+  //If timeResetN is true, randomize the time until the creature respawns
    if(timeReset1){
         
-        remainingtimeDelay1 = (int)random(120,360);
+        remainingtimeDelay1 = (int)random(120,1200); //Randomizes the time
        creature1X = creature1XOrigin;
       creature1Y = creature1YOrigin;
       creature1VelocityX = 0;
       creature1VelocityY = 0;
       
      
-        
+        //Sets itself back to false
         timeReset1 = false;
         
         
@@ -267,7 +251,7 @@ void draw()
   
   if(timeReset2){
         
-       remainingtimeDelay2 = (int)random(120,360);
+       remainingtimeDelay2 = (int)random(120,1200);
        creature2X = creature2XOrigin;
       creature2Y = creature2YOrigin;
       creature2VelocityX = 0;
@@ -298,7 +282,7 @@ void draw()
   
   if(timeReset3){
         
-        remainingtimeDelay3 = (int)random(120,360);
+        remainingtimeDelay3 = (int)random(120,1200);
        creature3X = creature3XOrigin;
       creature3Y = creature3YOrigin;
       creature3VelocityX = 0;
@@ -332,7 +316,7 @@ void draw()
   
   if(timeReset4){
         
-      remainingtimeDelay4 = (int)random(120,360);
+      remainingtimeDelay4 = (int)random(120,1200);
       creature4X = creature4XOrigin;
       creature4Y = creature4YOrigin;
       creature4VelocityX = 0;
@@ -365,7 +349,7 @@ void draw()
   
   if(timeReset5){
         
-        remainingtimeDelay5 = (int)random(120,360);
+        remainingtimeDelay5 = (int)random(120,1200);
        creature5X = creature5XOrigin;
       creature5Y = creature5YOrigin;
       creature5VelocityX = 0;
@@ -403,7 +387,7 @@ void draw()
   }
   if(timeReset6){
         
-        remainingtimeDelay6 = (int)random(120,360);
+        remainingtimeDelay6 = (int)random(120,1200);
        creature6X = creature6XOrigin;
       creature6Y = creature6YOrigin;
       creature6VelocityX = 0;
@@ -436,7 +420,7 @@ void draw()
   
   if(timeReset7){
         
-        remainingtimeDelay7 = (int)random(120,360);
+        remainingtimeDelay7 = (int)random(120,1200);
        creature7X = creature7XOrigin;
       creature7Y = creature7YOrigin;
       creature7VelocityX = 0;
@@ -469,7 +453,7 @@ void draw()
   
   if(timeReset8){
         
-        remainingtimeDelay8 = (int)random(120,360);
+        remainingtimeDelay8 = (int)random(120,1200);
        creature8X = creature8XOrigin;
       creature8Y = creature8YOrigin;
       creature8VelocityX = 0;
@@ -503,7 +487,7 @@ void draw()
  
 if(timeReset9){
         
-        remainingtimeDelay9 = (int)random(120,360);
+        remainingtimeDelay9 = (int)random(120,1200);
        creature9X = creature9XOrigin;
       creature9Y = creature9YOrigin;
       creature9VelocityX = 0;
@@ -518,8 +502,6 @@ if(timeReset9){
       
   
   
-
-  
  
    image(swordCursor, mouseX, 450);
   image(town1Sprite,0,700,900,200);
@@ -530,23 +512,25 @@ if(timeReset9){
   
 }
 
-
+//creatureN creation function
 void creature1(int x, int y, int size)
 {
-  fill(255,0,0);
-  ellipse(x,y,size,size);
-   creature1X = creature1X + (int)creature1VelocityX;
-  creature1Y = creature1Y + (int)creature1VelocityY;
   
+  ellipse(x,y,size,size); //Creates the creature based on x, y and size
+   creature1X = creature1X + (int)creature1VelocityX; //Determines creature's horiz speed and direction
+  creature1Y = creature1Y + (int)creature1VelocityY; //Determines creature's vert speed and direction
+  
+  //distance equation which determines the distance between the creature and the platform
     int dist1 = (int)distancePlatform1((int)creature1X, (int)creature1Y, (int)platform1X, (int)platform1Y);
  
-  
+  //While the creature is on the platform, it moves toward the edge
   if(dist1 < minPlatformDistance1)
   {
     creature1VelocityY = 0;
     creature1VelocityX = 1;
     
     
+    //If the creature goes off the platform, randomize the velocity
   }else if (dist1 > minPlatformDistance1 && creature1VelocityY == 0)
   {
     randomVelocityLeft1 = true;
@@ -556,16 +540,17 @@ void creature1(int x, int y, int size)
   if(randomVelocityLeft1)
   {
     
-    creature1VelocityY = random(2,3);
-    creature1VelocityX = random(1,3);
+    creature1VelocityY = random(2,3); //Randomizes fall speed
+    creature1VelocityX = random(1,3); //Randomizes trajectory
     
+    //Makes itself false so it only happens once
     randomVelocityLeft1 = false;
   }
   
 }
 void creature2(int x, int y, int size)
 {
-  fill(255);
+  
   ellipse(x,y,size,size);
   
     creature2X = creature2X + (int)creature2VelocityX;
@@ -579,11 +564,19 @@ void creature2(int x, int y, int size)
     creature2VelocityX = 1;
     
     
-  }else
+  }else if (dist2 > minPlatformDistance1 && creature2VelocityY == 0)
+  {
+    randomVelocityLeft2 = true;
+    
+  }
+  
+  if(randomVelocityLeft2)
   {
     
-    creature2VelocityY = creature2VelocityYFall;
-    creature2VelocityX = creature2VelocityXFall;
+    creature2VelocityY = random(2,3);
+    creature2VelocityX = random(1,3);
+    
+    randomVelocityLeft2 = false;
   }
   
   
@@ -591,7 +584,7 @@ void creature2(int x, int y, int size)
 void creature3(int x, int y, int size)
 {
   
-  fill(255);
+ 
   ellipse(x,y,size,size);
   
   creature3X = creature3X + (int)creature3VelocityX;
@@ -605,39 +598,75 @@ void creature3(int x, int y, int size)
     creature3VelocityX = 1;
     
     
-  }else
+  }else if (dist3 > minPlatformDistance1 && creature3VelocityY == 0)
+  {
+    randomVelocityLeft3 = true;
+    
+  }
+  
+  if(randomVelocityLeft3)
   {
     
-    creature3VelocityY = creature3VelocityYFall;
-    creature3VelocityX = creature3VelocityXFall;
+    creature3VelocityY = random(2,3);
+    creature3VelocityX = random(1,3);
+    
+    randomVelocityLeft3 = false;
   }
   
 }
 void creature4(int x, int y, int size)
 {
   
-  fill(255);
+  
   ellipse(x,y,size,size);
   creature4X = creature4X + (int)creature4VelocityX;
   creature4Y = creature4Y + (int)creature4VelocityY;
   
    
-    creature4VelocityY = creature4VelocityYFall;
-    creature4VelocityX = creature4VelocityXFall;
+    if(creature4Y <= 0)
+    {
+      
+      
+    randomVelocityUp1 = true;
+    
+  }
+  
+  if(randomVelocityUp1)
+  {
+    
+    creature4VelocityY = random(2,3);
+    creature4VelocityX = random(-2,2);
+    
+    randomVelocityUp1 = false;
+  }
 }
   
 
 void creature5(int x, int y, int size)
 {
   
-  fill(255);
+  
   ellipse(x,y,size,size);
   creature5X = creature5X + (int)creature5VelocityX;
   creature5Y = creature5Y + (int)creature5VelocityY;
   
    
-    creature5VelocityY = creature5VelocityYFall;
-    creature5VelocityX = creature5VelocityXFall;
+    if(creature5Y <= 0)
+    {
+      
+      
+    randomVelocityUp2 = true;
+    
+  }
+  
+  if(randomVelocityUp2)
+  {
+    
+    creature5VelocityY = random(2,3);
+    creature5VelocityX = random(-2,2);
+    
+    randomVelocityUp2 = false;
+  }
   
 }
 
@@ -650,14 +679,28 @@ void creature5(int x, int y, int size)
 void creature6(int x, int y, int size)
 {
   
-  fill(255);
+  
   ellipse(x,y,size,size);
   creature6X = creature6X + (int)creature6VelocityX;
   creature6Y = creature6Y + (int)creature6VelocityY;
   
    
-    creature6VelocityY = creature6VelocityYFall;
-    creature6VelocityX = creature6VelocityXFall;
+    if(creature6Y <= 0)
+    {
+      
+      
+    randomVelocityUp3 = true;
+    
+  }
+  
+  if(randomVelocityUp3)
+  {
+    
+    creature6VelocityY = random(2,3);
+    creature6VelocityX = random(-2,2);
+    
+    randomVelocityUp3 = false;
+  }
   
 }
 
@@ -669,7 +712,7 @@ void creature6(int x, int y, int size)
 void creature7(int x, int y, int size)
 {
   
-  fill(255);
+  
   ellipse(x,y,size,size);
   
   creature7X = creature7X - (int)creature7VelocityX;
@@ -683,12 +726,21 @@ void creature7(int x, int y, int size)
     creature7VelocityX = 1;
     
     
-  }else
+  }else if (dist7 > minPlatformDistance2 && creature7VelocityY == 0)
+  {
+    randomVelocityRight1 = true;
+    
+  }
+  
+  if(randomVelocityRight1)
   {
     
-    creature7VelocityY = creature7VelocityYFall;
-    creature7VelocityX = creature7VelocityXFall;
+    creature7VelocityY = random(2,3);
+    creature7VelocityX = random(1,3);
+    
+    randomVelocityRight1 = false;
   }
+  
   
 }
 
@@ -701,7 +753,7 @@ void creature7(int x, int y, int size)
 void creature8(int x, int y, int size)
 {
   
-  fill(255);
+  
   ellipse(x,y,size,size);
   creature8X = creature8X - (int)creature8VelocityX;
   creature8Y = creature8Y + (int)creature8VelocityY;
@@ -714,12 +766,21 @@ void creature8(int x, int y, int size)
     creature8VelocityX = 1;
     
     
-  }else
+  }else if (dist8 > minPlatformDistance2 && creature8VelocityY == 0)
+  {
+    randomVelocityRight2 = true;
+    
+  }
+  
+  if(randomVelocityRight2)
   {
     
-    creature8VelocityY = creature8VelocityYFall;
-    creature8VelocityX = creature8VelocityXFall;
+    creature8VelocityY = random(2,3);
+    creature8VelocityX = random(1,3);
+    
+    randomVelocityRight2 = false;
   }
+  
   
 }
 
@@ -731,7 +792,7 @@ void creature8(int x, int y, int size)
 void creature9(int x, int y, int size)
 {
   
-  fill(255);
+  
   ellipse(x,y,size,size);
   
   creature9X = creature9X - (int)creature9VelocityX;
@@ -745,12 +806,21 @@ void creature9(int x, int y, int size)
     creature9VelocityX = 1;
     
     
-  }else
+  }else if (dist9 > minPlatformDistance2 && creature9VelocityY == 0)
+  {
+    randomVelocityRight3 = true;
+    
+  }
+  
+  if(randomVelocityRight3)
   {
     
-    creature9VelocityY = creature9VelocityYFall;
-    creature9VelocityX = creature9VelocityXFall;
+    creature9VelocityY = random(2,3);
+    creature9VelocityX = random(1,3);
+    
+    randomVelocityRight3 = false;
   }
+  
   
 }
 
