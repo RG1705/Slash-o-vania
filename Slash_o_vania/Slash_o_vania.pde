@@ -73,15 +73,15 @@ int platform1Y = 90;
 int platform2Y = 90;
 
 //Amount of seconds until a creature spawns
-int timeDelay1 = (int)random(2,20);
-int timeDelay2 = (int)random(2,20);
-int timeDelay3 = (int)random(2,20);
-int timeDelay4 = (int)random(2,20);
-int timeDelay5 = (int)random(2,20);
-int timeDelay6 = (int)random(2,20);
-int timeDelay7 = (int)random(2,20);
-int timeDelay8 = (int)random(2,20);
-int timeDelay9 = (int)random(2,20);
+int timeDelay1 = (int)random(2, 20);
+int timeDelay2 = (int)random(2, 20);
+int timeDelay3 = (int)random(2, 20);
+int timeDelay4 = (int)random(2, 20);
+int timeDelay5 = (int)random(2, 20);
+int timeDelay6 = (int)random(2, 20);
+int timeDelay7 = (int)random(2, 20);
+int timeDelay8 = (int)random(2, 20);
+int timeDelay9 = (int)random(2, 20);
 
 //framerate
 int rate = 60;
@@ -160,42 +160,46 @@ PFont CreatureStat;
 
 void setup()
 {
-  size(900,900);
+  size(900, 900);
   frameRate(rate);
   backgroundSprite = loadImage("backgroundnomosaic1.png");
   town1Sprite = loadImage("rowofhousesfront1.png");
   town2Sprite = loadImage("rowofhousesback1.png");
   moonSprite = loadImage("gamemoon1.png");
-    platL =loadImage("platformL.png");
+  platL =loadImage("platformL.png");
   platR = loadImage("platformR.png");
   swordCursor =loadImage("swordcursor1.png");
-      gothicFont = loadFont("OldEnglishTextMT-48.vlw");//the counter text font
+  gothicFont = loadFont("OldEnglishTextMT-48.vlw");//the counter text font
   textFont(gothicFont);
 }
 
 void draw()
 {
-  
+
 
   noCursor();
-  image(backgroundSprite,0,0,900,900);
-  image(moonSprite,370,90,150,150);
-  image(town2Sprite,0,700,900,200);
+  image(backgroundSprite, 0, 0, 900, 900);
+  image(moonSprite, 370, 90, 150, 150);
+  image(town2Sprite, 0, 700, 900, 200);
   fill(255);
-  rect(platform1X,platform1Y,200,50);
-  rect(platform2X,platform2Y,200,50);
-  
-    image(swordCursor, mouseX, 450);
+  rect(platform1X, platform1Y, 200, 50);
+  rect(platform2X, platform2Y, 200, 50);
+
+  image(swordCursor, mouseX, 450);
   image(platR, 700, 90); //adds overlay platform on right
   image(platL, 0, 90); //adds overlay platform on left
-  
+
   fill(255, 30, 40); //sets text color
   textSize(30);
   textAlign(CENTER);
   int center=900/2;
   text("Foes Slain:"+killCounter, center, 65);
-  
- //Makes the timers for each creature decrease every frame
+  fill(255, 200, 0);
+  text("Victory = 20 Kills", 850, 215);
+  fill(255);
+  text("Loss = 15 missed", 780, 270);
+
+  //Makes the timers for each creature decrease every frame
   remainingtimeDelay1--;
   remainingtimeDelay2--;
   remainingtimeDelay3--;
@@ -205,514 +209,429 @@ void draw()
   remainingtimeDelay7--;
   remainingtimeDelay8--;
   remainingtimeDelay9--;
- 
+
   //N = respective creature number
   //After remainingtimeDelayN is 0 or below, creature N's function will activate
-  if (remainingtimeDelay1 <= 0){
-    
-    creature1(creature1X,creature1Y,creatureSize); //CreatureN function
-    
-    
+  if (remainingtimeDelay1 <= 0) {
+
+    creature1(creature1X, creature1Y, creatureSize); //CreatureN function
+
+
     //If the creature reaches the ground, time Reset is true
-    if (creature1Y > height + 10){
-     
- 
-      
+    if (creature1Y > height + 10) {
+
+
+
       timeReset1 = true;
-      
-      
-      
     }
-     
   }
-  
+
   //If timeResetN is true, randomize the time until the creature respawns
-   if(timeReset1){
-        
-        remainingtimeDelay1 = (int)random(120,1200); //Randomizes the time
-       creature1X = creature1XOrigin;
-      creature1Y = creature1YOrigin;
-      creature1VelocityX = 0;
-      creature1VelocityY = 0;
-      
-     
-        //Sets itself back to false
-        timeReset1 = false;
-        
-        
-      }
-  
-  
-  if (remainingtimeDelay2 <= 0){
-    
-    
-    creature2(creature2X,creature2Y,creatureSize);
-    
-    if (creature2Y > height + 10){
-     
- 
-      
+  if (timeReset1) {
+
+    remainingtimeDelay1 = (int)random(120, 1200); //Randomizes the time
+    creature1X = creature1XOrigin;
+    creature1Y = creature1YOrigin;
+    creature1VelocityX = 0;
+    creature1VelocityY = 0;
+
+
+    //Sets itself back to false
+    timeReset1 = false;
+  }
+
+
+  if (remainingtimeDelay2 <= 0) {
+
+
+    creature2(creature2X, creature2Y, creatureSize);
+
+    if (creature2Y > height + 10) {
+
+
+
       timeReset2 = true;
-      
-      
-      
     }
-    
   }
-  
-  if(timeReset2){
-        
-       remainingtimeDelay2 = (int)random(120,1200);
-       creature2X = creature2XOrigin;
-      creature2Y = creature2YOrigin;
-      creature2VelocityX = 0;
-      creature2VelocityY = 0;
-      
-     
-        
-        timeReset2 = false;
-        
-      }
-  
-   if (remainingtimeDelay3 <= 0){
-    
-     
-     creature3(creature3X,creature3Y,creatureSize);
-     
-     if (creature3Y > height + 10){
-     
- 
-      
+
+  if (timeReset2) {
+
+    remainingtimeDelay2 = (int)random(120, 1200);
+    creature2X = creature2XOrigin;
+    creature2Y = creature2YOrigin;
+    creature2VelocityX = 0;
+    creature2VelocityY = 0;
+
+
+
+    timeReset2 = false;
+  }
+
+  if (remainingtimeDelay3 <= 0) {
+
+
+    creature3(creature3X, creature3Y, creatureSize);
+
+    if (creature3Y > height + 10) {
+
+
+
       timeReset3 = true;
-      
-      
-      
     }
-    
   }
-  
-  if(timeReset3){
-        
-        remainingtimeDelay3 = (int)random(120,1200);
-       creature3X = creature3XOrigin;
-      creature3Y = creature3YOrigin;
-      creature3VelocityX = 0;
-      creature3VelocityY = 0;
-      
-     
-        
-        timeReset3 = false;
-        
-        
-      }
-      
-  if (remainingtimeDelay4 <= 0){
-    
-    
-    creature4(creature4X,creature4Y,creatureSize);
-  
-   if (creature4Y > height + 10){
-     
- 
-      
+
+  if (timeReset3) {
+
+    remainingtimeDelay3 = (int)random(120, 1200);
+    creature3X = creature3XOrigin;
+    creature3Y = creature3YOrigin;
+    creature3VelocityX = 0;
+    creature3VelocityY = 0;
+
+
+
+    timeReset3 = false;
+  }
+
+  if (remainingtimeDelay4 <= 0) {
+
+
+    creature4(creature4X, creature4Y, creatureSize);
+
+    if (creature4Y > height + 10) {
+
+
+
       timeReset4 = true;
-      
-      
-      
     }
-      
-  
   }
-  
-  
-  if(timeReset4){
-        
-      remainingtimeDelay4 = (int)random(120,1200);
-      creature4X = creature4XOrigin;
-      creature4Y = creature4YOrigin;
-      creature4VelocityX = 0;
-      creature4VelocityY = 0;
-      
-     timeReset4 = false;
-        
-       
-        
-        
-      }
-  
-  if (remainingtimeDelay5 <= 0){
-    
-    
-    creature5(creature5X,creature5Y,creatureSize);
-    
-    if (creature5Y > height + 10){
-     
- 
-      
-      timeReset5 = true;
-      
-      
-      
-    }
-      
-  
+
+
+  if (timeReset4) {
+
+    remainingtimeDelay4 = (int)random(120, 1200);
+    creature4X = creature4XOrigin;
+    creature4Y = creature4YOrigin;
+    creature4VelocityX = 0;
+    creature4VelocityY = 0;
+
+    timeReset4 = false;
   }
-  
-  if(timeReset5){
-        
-        remainingtimeDelay5 = (int)random(120,1200);
-       creature5X = creature5XOrigin;
-      creature5Y = creature5YOrigin;
-      creature5VelocityX = 0;
-      creature5VelocityY = 0;
-      
-     
-       if (creature5Y > height + 10){
-     
- 
-      
+
+  if (remainingtimeDelay5 <= 0) {
+
+
+    creature5(creature5X, creature5Y, creatureSize);
+
+    if (creature5Y > height + 10) {
+
+
+
       timeReset5 = true;
-      
-      
-      
     }
-        
-        
-      }
-  
-    if (remainingtimeDelay6 <= 0){
-    
-    
-    creature6(creature6X,creature6Y,creatureSize);
-    if (creature6Y > height + 10){
-     
- 
-      
+  }
+
+  if (timeReset5) {
+
+    remainingtimeDelay5 = (int)random(120, 1200);
+    creature5X = creature5XOrigin;
+    creature5Y = creature5YOrigin;
+    creature5VelocityX = 0;
+    creature5VelocityY = 0;
+
+
+    if (creature5Y > height + 10) {
+
+
+
+      timeReset5 = true;
+    }
+  }
+
+  if (remainingtimeDelay6 <= 0) {
+
+
+    creature6(creature6X, creature6Y, creatureSize);
+    if (creature6Y > height + 10) {
+
+
+
       timeReset6 = true;
-      
-      
-      
     }
-      
-  
   }
-  if(timeReset6){
-        
-        remainingtimeDelay6 = (int)random(120,1200);
-       creature6X = creature6XOrigin;
-      creature6Y = creature6YOrigin;
-      creature6VelocityX = 0;
-      creature6VelocityY = 0;
-      
-     
-        
-        timeReset6 = false;
-        
-        
-      }
-  
-  if (remainingtimeDelay7 <= 0){
-    
-    
-    creature7(creature7X,creature7Y,creatureSize);
-    
-    if (creature7Y > height + 10){
-     
- 
-      
+  if (timeReset6) {
+
+    remainingtimeDelay6 = (int)random(120, 1200);
+    creature6X = creature6XOrigin;
+    creature6Y = creature6YOrigin;
+    creature6VelocityX = 0;
+    creature6VelocityY = 0;
+
+
+
+    timeReset6 = false;
+  }
+
+  if (remainingtimeDelay7 <= 0) {
+
+
+    creature7(creature7X, creature7Y, creatureSize);
+
+    if (creature7Y > height + 10) {
+
+
+
       timeReset7 = true;
-      
-      
-      
     }
-      
-  
   }
-  
-  if(timeReset7){
-        
-        remainingtimeDelay7 = (int)random(120,1200);
-       creature7X = creature7XOrigin;
-      creature7Y = creature7YOrigin;
-      creature7VelocityX = 0;
-      creature7VelocityY = 0;
-      
-     
-        
-        timeReset7 = false;
-        
-        
-      }
-  
-  if (remainingtimeDelay8 <= 0){
-    
-    
-    creature8(creature8X,creature8Y,creatureSize);
-    
-    if (creature8Y > height + 10){
-     
- 
-      
+
+  if (timeReset7) {
+
+    remainingtimeDelay7 = (int)random(120, 1200);
+    creature7X = creature7XOrigin;
+    creature7Y = creature7YOrigin;
+    creature7VelocityX = 0;
+    creature7VelocityY = 0;
+
+
+
+    timeReset7 = false;
+  }
+
+  if (remainingtimeDelay8 <= 0) {
+
+
+    creature8(creature8X, creature8Y, creatureSize);
+
+    if (creature8Y > height + 10) {
+
+
+
       timeReset8 = true;
-      
-      
-      
     }
-      
-  
   }
-  
-  if(timeReset8){
-        
-        remainingtimeDelay8 = (int)random(120,1200);
-       creature8X = creature8XOrigin;
-      creature8Y = creature8YOrigin;
-      creature8VelocityX = 0;
-      creature8VelocityY = 0;
-      
-     
-        
-        timeReset8 = false;
-        
-        
-      }
-      
-  
-  if (remainingtimeDelay9 <= 0){
-    
-    
-    creature9(creature9X,creature9Y,creatureSize);
-    if (creature9Y > height + 10){
-     
- 
-      
+
+  if (timeReset8) {
+
+    remainingtimeDelay8 = (int)random(120, 1200);
+    creature8X = creature8XOrigin;
+    creature8Y = creature8YOrigin;
+    creature8VelocityX = 0;
+    creature8VelocityY = 0;
+
+
+
+    timeReset8 = false;
+  }
+
+
+  if (remainingtimeDelay9 <= 0) {
+
+
+    creature9(creature9X, creature9Y, creatureSize);
+    if (creature9Y > height + 10) {
+
+
+
       timeReset9 = true;
-      
-      
-      
     }
-      
-  
   }
- 
- 
-if(timeReset9){
-        
-        remainingtimeDelay9 = (int)random(120,1200);
-       creature9X = creature9XOrigin;
-      creature9Y = creature9YOrigin;
-      creature9VelocityX = 0;
-      creature9VelocityY = 0;
-      
-     
-        
-        timeReset9 = false;
-        
-        
-      }
-      
-  
-  
- 
-   image(swordCursor, mouseX, 450);
-  image(town1Sprite,0,700,900,200);
-  
-  
-  
-  
-  
+
+
+  if (timeReset9) {
+
+    remainingtimeDelay9 = (int)random(120, 1200);
+    creature9X = creature9XOrigin;
+    creature9Y = creature9YOrigin;
+    creature9VelocityX = 0;
+    creature9VelocityY = 0;
+
+
+
+    timeReset9 = false;
+  }
+
+
+
+
+  image(swordCursor, mouseX, 450);
+  image(town1Sprite, 0, 700, 900, 200);
 }
 
 //creatureN creation function
 void creature1(int x, int y, int size)
 {
-  
-  ellipse(x,y,size,size); //Creates the creature based on x, y and size
-   creature1X = creature1X + (int)creature1VelocityX; //Determines creature's horiz speed and direction
+
+  ellipse(x, y, size, size); //Creates the creature based on x, y and size
+  creature1X = creature1X + (int)creature1VelocityX; //Determines creature's horiz speed and direction
   creature1Y = creature1Y + (int)creature1VelocityY; //Determines creature's vert speed and direction
-  
+
   //distance equation which determines the distance between the creature and the platform
-    int dist1 = (int)distancePlatform1((int)creature1X, (int)creature1Y, (int)platform1X, (int)platform1Y);
-    
+  int dist1 = (int)distancePlatform1((int)creature1X, (int)creature1Y, (int)platform1X, (int)platform1Y);
+
   //While the creature is on the platform, it moves toward the edge
-  if(dist1 < minPlatformDistance1)
+  if (dist1 < minPlatformDistance1)
   {
     creature1VelocityY = 0;
     creature1VelocityX = 1;
-    
-    
+
+
     //If the creature goes off the platform, randomize the velocity
-  }else if (dist1 > minPlatformDistance1 && creature1VelocityY == 0)
+  } else if (dist1 > minPlatformDistance1 && creature1VelocityY == 0)
   {
     randomVelocityLeft1 = true;
-    
   }
-  
-  if(randomVelocityLeft1)
+
+  if (randomVelocityLeft1)
   {
-    
-    creature1VelocityY = random(2,3); //Randomizes fall speed
-    creature1VelocityX = random(1,3); //Randomizes trajectory
-    
+
+    creature1VelocityY = random(2, 3); //Randomizes fall speed
+    creature1VelocityX = random(1, 3); //Randomizes trajectory
+
     //Makes itself false so it only happens once
     randomVelocityLeft1 = false;
   }
-  
 }
 void creature2(int x, int y, int size)
 {
-  
-  ellipse(x,y,size,size);
-  
-    creature2X = creature2X + (int)creature2VelocityX;
+
+  ellipse(x, y, size, size);
+
+  creature2X = creature2X + (int)creature2VelocityX;
   creature2Y = creature2Y + (int)creature2VelocityY;
-  
-    int dist2 = (int)distancePlatform1((int)creature2X, (int)creature2Y, (int)platform1X, (int)platform1Y);
-  
-  if(dist2 < minPlatformDistance1)
+
+  int dist2 = (int)distancePlatform1((int)creature2X, (int)creature2Y, (int)platform1X, (int)platform1Y);
+
+  if (dist2 < minPlatformDistance1)
   {
     creature2VelocityY = 0;
     creature2VelocityX = 1;
-    
-    
-  }else if (dist2 > minPlatformDistance1 && creature2VelocityY == 0)
+  } else if (dist2 > minPlatformDistance1 && creature2VelocityY == 0)
   {
     randomVelocityLeft2 = true;
-    
   }
-  
-  if(randomVelocityLeft2)
+
+  if (randomVelocityLeft2)
   {
-    
-    creature2VelocityY = random(2,3);
-    creature2VelocityX = random(1,3);
-    
+
+    creature2VelocityY = random(2, 3);
+    creature2VelocityX = random(1, 3);
+
     randomVelocityLeft2 = false;
   }
-  
-  
 }
 void creature3(int x, int y, int size)
 {
-  
- 
-  ellipse(x,y,size,size);
-  
+
+
+  ellipse(x, y, size, size);
+
   creature3X = creature3X + (int)creature3VelocityX;
   creature3Y = creature3Y + (int)creature3VelocityY;
-  
-    int dist3 = (int)distancePlatform1((int)creature3X, (int)creature3Y, (int)platform1X, (int)platform1Y);
-  
-  if(dist3 < minPlatformDistance1)
+
+  int dist3 = (int)distancePlatform1((int)creature3X, (int)creature3Y, (int)platform1X, (int)platform1Y);
+
+  if (dist3 < minPlatformDistance1)
   {
     creature3VelocityY = 0;
     creature3VelocityX = 1;
-    
-    
-  }else if (dist3 > minPlatformDistance1 && creature3VelocityY == 0)
+  } else if (dist3 > minPlatformDistance1 && creature3VelocityY == 0)
   {
     randomVelocityLeft3 = true;
-    
   }
-  
-  if(randomVelocityLeft3)
+
+  if (randomVelocityLeft3)
   {
-    
-    creature3VelocityY = random(2,3);
-    creature3VelocityX = random(1,3);
-    
+
+    creature3VelocityY = random(2, 3);
+    creature3VelocityX = random(1, 3);
+
     randomVelocityLeft3 = false;
   }
-  
 }
 void creature4(int x, int y, int size)
 {
-  
-  
-  ellipse(x,y,size,size);
+
+
+  ellipse(x, y, size, size);
   creature4X = creature4X + (int)creature4VelocityX;
   creature4Y = creature4Y + (int)creature4VelocityY;
-  
-   
-    if(creature4Y <= 0)
-    {
-      
-      
-    randomVelocityUp1 = true;
-    
-  }
-  
-  if(randomVelocityUp1)
+
+
+  if (creature4Y <= 0)
   {
-    
-    creature4VelocityY = random(2,3);
-    creature4VelocityX = random(-2,2);
-    
+
+
+    randomVelocityUp1 = true;
+  }
+
+  if (randomVelocityUp1)
+  {
+
+    creature4VelocityY = random(2, 3);
+    creature4VelocityX = random(-2, 2);
+
     randomVelocityUp1 = false;
   }
 }
-  
+
 
 void creature5(int x, int y, int size)
 {
-  
-  
-  ellipse(x,y,size,size);
+
+
+  ellipse(x, y, size, size);
   creature5X = creature5X + (int)creature5VelocityX;
   creature5Y = creature5Y + (int)creature5VelocityY;
-  
-   
-    if(creature5Y <= 0)
-    {
-      
-      
-    randomVelocityUp2 = true;
-    
-  }
-  
-  if(randomVelocityUp2)
+
+
+  if (creature5Y <= 0)
   {
-    
-    creature5VelocityY = random(2,3);
-    creature5VelocityX = random(-2,2);
-    
+
+
+    randomVelocityUp2 = true;
+  }
+
+  if (randomVelocityUp2)
+  {
+
+    creature5VelocityY = random(2, 3);
+    creature5VelocityX = random(-2, 2);
+
     randomVelocityUp2 = false;
   }
-  
 }
 
-  
-  
-  
-  
+
+
+
+
 
 
 void creature6(int x, int y, int size)
 {
-  
-  
-  ellipse(x,y,size,size);
+
+
+  ellipse(x, y, size, size);
   creature6X = creature6X + (int)creature6VelocityX;
   creature6Y = creature6Y + (int)creature6VelocityY;
-  
-   
-    if(creature6Y <= 0)
-    {
-      
-      
-    randomVelocityUp3 = true;
-    
-  }
-  
-  if(randomVelocityUp3)
+
+
+  if (creature6Y <= 0)
   {
-    
-    creature6VelocityY = random(2,3);
-    creature6VelocityX = random(-2,2);
-    
+
+
+    randomVelocityUp3 = true;
+  }
+
+  if (randomVelocityUp3)
+  {
+
+    creature6VelocityY = random(2, 3);
+    creature6VelocityX = random(-2, 2);
+
     randomVelocityUp3 = false;
   }
-  
 }
 
 
@@ -722,156 +641,135 @@ void creature6(int x, int y, int size)
 
 void creature7(int x, int y, int size)
 {
-  
-  
-  ellipse(x,y,size,size);
-  
+
+
+  ellipse(x, y, size, size);
+
   creature7X = creature7X - (int)creature7VelocityX;
   creature7Y = creature7Y + (int)creature7VelocityY;
-  
-    int dist7 = (int)distancePlatform2((int)creature7X, (int)creature7Y, (int)platform2X+230, (int)platform2Y);
-  
-  if(dist7 < minPlatformDistance2 + 20)
+
+  int dist7 = (int)distancePlatform2((int)creature7X, (int)creature7Y, (int)platform2X+230, (int)platform2Y);
+
+  if (dist7 < minPlatformDistance2 + 20)
   {
     creature7VelocityY = 0;
     creature7VelocityX = 1;
-    
-    
-  }else if (dist7 > minPlatformDistance2 && creature7VelocityY == 0)
+  } else if (dist7 > minPlatformDistance2 && creature7VelocityY == 0)
   {
     randomVelocityRight1 = true;
-    
   }
-  
-  if(randomVelocityRight1)
+
+  if (randomVelocityRight1)
   {
-    
-    creature7VelocityY = random(2,3);
-    creature7VelocityX = random(1,3);
-    
+
+    creature7VelocityY = random(2, 3);
+    creature7VelocityX = random(1, 3);
+
     randomVelocityRight1 = false;
   }
-  
-  
 }
 
-  
-  
-  
-  
+
+
+
+
 
 
 void creature8(int x, int y, int size)
 {
-  
-  
-  ellipse(x,y,size,size);
+
+
+  ellipse(x, y, size, size);
   creature8X = creature8X - (int)creature8VelocityX;
   creature8Y = creature8Y + (int)creature8VelocityY;
-  
-    int dist8 = (int)distancePlatform2((int)creature8X, (int)creature8Y, (int)platform2X+230, (int)platform2Y);
-  
-  if(dist8 < minPlatformDistance2 + 20)
+
+  int dist8 = (int)distancePlatform2((int)creature8X, (int)creature8Y, (int)platform2X+230, (int)platform2Y);
+
+  if (dist8 < minPlatformDistance2 + 20)
   {
     creature8VelocityY = 0;
     creature8VelocityX = 1;
-    
-    
-  }else if (dist8 > minPlatformDistance2 && creature8VelocityY == 0)
+  } else if (dist8 > minPlatformDistance2 && creature8VelocityY == 0)
   {
     randomVelocityRight2 = true;
-    
   }
-  
-  if(randomVelocityRight2)
+
+  if (randomVelocityRight2)
   {
-    
-    creature8VelocityY = random(2,3);
-    creature8VelocityX = random(1,3);
-    
+
+    creature8VelocityY = random(2, 3);
+    creature8VelocityX = random(1, 3);
+
     randomVelocityRight2 = false;
   }
-  
-  
 }
 
 
 
-  
+
 
 
 void creature9(int x, int y, int size)
 {
-  
-  
-  ellipse(x,y,size,size);
-  
+
+
+  ellipse(x, y, size, size);
+
   creature9X = creature9X - (int)creature9VelocityX;
   creature9Y = creature9Y + (int)creature9VelocityY;
-  
-    int dist9 = (int)distancePlatform2((int)creature9X, (int)creature9Y, (int)platform2X+230, (int)platform2Y);
-  
-  if(dist9 < minPlatformDistance2 + 20)
+
+  int dist9 = (int)distancePlatform2((int)creature9X, (int)creature9Y, (int)platform2X+230, (int)platform2Y);
+
+  if (dist9 < minPlatformDistance2 + 20)
   {
     creature9VelocityY = 0;
     creature9VelocityX = 1;
-    
-    
-  }else if (dist9 > minPlatformDistance2 && creature9VelocityY == 0)
+  } else if (dist9 > minPlatformDistance2 && creature9VelocityY == 0)
   {
     randomVelocityRight3 = true;
-    
   }
-  
-  if(randomVelocityRight3)
+
+  if (randomVelocityRight3)
   {
-    
-    creature9VelocityY = random(2,3);
-    creature9VelocityX = random(1,3);
-    
+
+    creature9VelocityY = random(2, 3);
+    creature9VelocityX = random(1, 3);
+
     randomVelocityRight3 = false;
   }
-  
-  
 }
 
-  
-  
-  
-  
+
+
+
+
 
 float distancePlatform1(int x1, int y1, int x2, int y2)
 {
-  
+
   int XDist = abs(x1-x2);
-  
+
   int YDist = abs(y1-y2);
-  
+
   return sqrt((XDist*XDist)+(YDist * YDist));
-  
-  
 }
 
 float distancePlatform2(int x1, int y1, int x2, int y2)
 {
-  
+
   int XDist = abs(x1-x2);
-  
+
   int YDist = abs(y1-y2);
-  
+
   return sqrt((XDist*XDist)+(YDist * YDist));
-  
-  
 }
 
 float distanceSword(int x1, int y1, int x2, int y2)
 {
-  
+
   int XDist = abs(x1-x2);
-  
+
   int YDist = abs(y1-y2);
-  
+
   return sqrt((XDist*XDist)+(YDist * YDist));
-  
-  
 }
