@@ -533,7 +533,7 @@ void creature1(int x, int y, int size)
   
   //distance equation which determines the distance between the creature and the platform
     int dist1 = (int)distancePlatform1((int)creature1X, (int)creature1Y, (int)platform1X, (int)platform1Y);
- 
+    
   //While the creature is on the platform, it moves toward the edge
   if(dist1 < minPlatformDistance1)
   {
