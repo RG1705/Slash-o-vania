@@ -19,7 +19,7 @@ int deathcounter; //How many creatures have landed
 int playerX; //player's X position
 int playerY;//player's Y position
 int playerSize; //Player's size
-int swordDistance = 20; //Minimum distance for sword to hit
+int minSwordDistance = 100; //Minimum distance for sword to hit
 
 //Original X and Y positions of each creature
 int creature1XOrigin = -10;
@@ -461,36 +461,66 @@ void draw()
 //creatureN creation function
 void creature1(int x, int y, int size)
 {
-
-  ellipse(x, y, size, size); //Creates the creature based on x, y and size
-  creature1X = creature1X + (int)creature1VelocityX; //Determines creature's horiz speed and direction
+  
+  ellipse(x,y,size,size); //Creates the creature based on x, y and size
+   creature1X = creature1X + (int)creature1VelocityX; //Determines creature's horiz speed and direction
   creature1Y = creature1Y + (int)creature1VelocityY; //Determines creature's vert speed and direction
-
+  
   //distance equation which determines the distance between the creature and the platform
-  int dist1 = (int)distancePlatform1((int)creature1X, (int)creature1Y, (int)platform1X, (int)platform1Y);
-
+    int dist1 = (int)distancePlatform1((int)creature1X, (int)creature1Y, (int)platform1X, (int)platform1Y);
+    int distKill = (int)distanceSword((int)creature1X, (int)creature1Y, (int)playerX, (int)playerY);
+ 
+ 
   //While the creature is on the platform, it moves toward the edge
-  if (dist1 < minPlatformDistance1)
+  if(dist1 < minPlatformDistance1)
   {
     creature1VelocityY = 0;
     creature1VelocityX = 1;
-
-
+    
+    
     //If the creature goes off the platform, randomize the velocity
-  } else if (dist1 > minPlatformDistance1 && creature1VelocityY == 0)
+  }else if (dist1 > minPlatformDistance1 && creature1VelocityY == 0)
   {
     randomVelocityLeft1 = true;
+    
   }
-
-  if (randomVelocityLeft1)
+  
+  if(randomVelocityLeft1)
   {
-
-    creature1VelocityY = random(2, 3); //Randomizes fall speed
-    creature1VelocityX = random(1, 3); //Randomizes trajectory
-
+    
+    creature1VelocityY = random(2,3); //Randomizes fall speed
+    creature1VelocityX = random(1,3); //Randomizes trajectory
+    
     //Makes itself false so it only happens once
     randomVelocityLeft1 = false;
   }
+  
+  if(distKill < minSwordDistance)
+  {
+    creature1Killed = true;
+    
+    
+  }
+  
+  if(creature1Killed)
+  {
+    
+    remainingtimeDelay1 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature1X = creature1XOrigin;
+      creature1Y = creature1YOrigin;
+      
+      //Creature stops moving
+      creature1VelocityX = 0;
+      creature1VelocityY = 0;
+      
+     
+        //Sets itself back to false
+        creature1Killed = false;
+    
+  }
+  
 }
 void creature2(int x, int y, int size)
 {
