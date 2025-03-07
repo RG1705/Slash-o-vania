@@ -144,6 +144,17 @@ boolean randomVelocityUp1;
 boolean randomVelocityUp2;
 boolean randomVelocityUp3;
 
+//booleans for when the creatures are killed
+boolean creature1Killed;
+boolean creature2Killed;
+boolean creature3Killed;
+boolean creature4Killed;
+boolean creature5Killed;
+boolean creature6Killed;
+boolean creature7Killed;
+boolean creature8Killed;
+boolean creature9Killed;
+
 PFont PlayerStat;
 PFont CreatureStat;
 
