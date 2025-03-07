@@ -453,8 +453,9 @@ void draw()
 
 
 
-
-  image(swordCursor, mouseX, 450);
+playerX = mouseX;
+  playerY = 450;
+   image(swordCursor, playerX, playerY);
   image(town1Sprite, 0, 700, 900, 200);
 }
 
@@ -468,7 +469,35 @@ void creature1(int x, int y, int size)
   
   //distance equation which determines the distance between the creature and the platform
     int dist1 = (int)distancePlatform1((int)creature1X, (int)creature1Y, (int)platform1X, (int)platform1Y);
+    
     int distKill = (int)distanceSword((int)creature1X, (int)creature1Y, (int)playerX, (int)playerY);
+
+ if(distKill < minSwordDistance)
+  {
+    creature1Killed = true;
+    
+    
+  }
+  
+  if(creature1Killed)
+  {
+    
+    remainingtimeDelay1 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature1X = creature1XOrigin;
+      creature1Y = creature1YOrigin;
+      
+      //Creature stops moving
+      creature1VelocityX = 0;
+      creature1VelocityY = 0;
+      
+     
+        //Sets itself back to false
+        creature1Killed = false;
+    
+  }
+  
  
  
   //While the creature is on the platform, it moves toward the edge
@@ -495,31 +524,7 @@ void creature1(int x, int y, int size)
     randomVelocityLeft1 = false;
   }
   
-  if(distKill < minSwordDistance)
-  {
-    creature1Killed = true;
-    
-    
-  }
   
-  if(creature1Killed)
-  {
-    
-    remainingtimeDelay1 = (int)random(120,1200); //Randomizes the time
-       
-       //Creature resets to original position
-       creature1X = creature1XOrigin;
-      creature1Y = creature1YOrigin;
-      
-      //Creature stops moving
-      creature1VelocityX = 0;
-      creature1VelocityY = 0;
-      
-     
-        //Sets itself back to false
-        creature1Killed = false;
-    
-  }
   
 }
 void creature2(int x, int y, int size)
