@@ -11,15 +11,15 @@ PImage swordCursor;
 PFont gothicFont;
 
 int winCounter;  //Total amount of kills to win
-int killCounter; //amount of creatures killed
-int loseCounter; //Total amount of creatures that need to land for a loss
-int deathcounter; //How many creatures have landed
+int killCounter = 20; //amount of creatures killed
+int loseCounter = 20; //Total amount of creatures that need to land for a loss
+int deathCounter; //How many creatures have landed
 
 
 int playerX; //player's X position
 int playerY;//player's Y position
 int playerSize; //Player's size
-int minSwordDistance = 100; //Minimum distance for sword to hit
+int minSwordDistance = 30; //Minimum distance for sword to hit
 
 //Original X and Y positions of each creature
 int creature1XOrigin = -10;
@@ -235,6 +235,7 @@ void draw()
     creature1VelocityX = 0;
     creature1VelocityY = 0;
 
+deathCounter --;
 
     //Sets itself back to false
     timeReset1 = false;
@@ -262,7 +263,7 @@ void draw()
     creature2VelocityX = 0;
     creature2VelocityY = 0;
 
-
+deathCounter --;
 
     timeReset2 = false;
   }
@@ -288,7 +289,7 @@ void draw()
     creature3VelocityX = 0;
     creature3VelocityY = 0;
 
-
+deathCounter --;
 
     timeReset3 = false;
   }
@@ -314,6 +315,8 @@ void draw()
     creature4Y = creature4YOrigin;
     creature4VelocityX = 0;
     creature4VelocityY = 0;
+    
+    deathCounter --;
 
     timeReset4 = false;
   }
@@ -339,13 +342,9 @@ void draw()
     creature5VelocityX = 0;
     creature5VelocityY = 0;
 
+deathCounter --;
 
-    if (creature5Y > height + 10) {
-
-
-
-      timeReset5 = true;
-    }
+   timeReset5 = false;
   }
 
   if (remainingtimeDelay6 <= 0) {
@@ -367,7 +366,7 @@ void draw()
     creature6VelocityX = 0;
     creature6VelocityY = 0;
 
-
+deathCounter --;
 
     timeReset6 = false;
   }
@@ -393,7 +392,7 @@ void draw()
     creature7VelocityX = 0;
     creature7VelocityY = 0;
 
-
+deathCounter --;
 
     timeReset7 = false;
   }
@@ -419,7 +418,7 @@ void draw()
     creature8VelocityX = 0;
     creature8VelocityY = 0;
 
-
+deathCounter --;
 
     timeReset8 = false;
   }
@@ -446,7 +445,7 @@ void draw()
     creature9VelocityX = 0;
     creature9VelocityY = 0;
 
-
+deathCounter --;
 
     timeReset9 = false;
   }
@@ -457,7 +456,9 @@ playerX = mouseX;
   playerY = 450;
    image(swordCursor, playerX, playerY);
   image(town1Sprite, 0, 700, 900, 200);
+  
 }
+
 
 //creatureN creation function
 void creature1(int x, int y, int size)
@@ -492,6 +493,7 @@ void creature1(int x, int y, int size)
       creature1VelocityX = 0;
       creature1VelocityY = 0;
       
+     killCounter--;
      
         //Sets itself back to false
         creature1Killed = false;
@@ -537,6 +539,35 @@ void creature2(int x, int y, int size)
 
   int dist2 = (int)distancePlatform1((int)creature2X, (int)creature2Y, (int)platform1X, (int)platform1Y);
 
+    int distKill = (int)distanceSword((int)creature2X, (int)creature2Y, (int)playerX, (int)playerY);
+
+ if(distKill < minSwordDistance)
+  {
+    creature2Killed = true;
+    
+    
+  }
+  
+  if(creature2Killed)
+  {
+    
+    remainingtimeDelay2 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature2X = creature2XOrigin;
+      creature2Y = creature2YOrigin;
+      
+      //Creature stops moving
+      creature2VelocityX = 0;
+      creature2VelocityY = 0;
+      
+     killCounter--;
+     
+        //Sets itself back to false
+        creature2Killed = false;
+    
+  }
+
   if (dist2 < minPlatformDistance1)
   {
     creature2VelocityY = 0;
@@ -566,6 +597,35 @@ void creature3(int x, int y, int size)
 
   int dist3 = (int)distancePlatform1((int)creature3X, (int)creature3Y, (int)platform1X, (int)platform1Y);
 
+    int distKill = (int)distanceSword((int)creature3X, (int)creature3Y, (int)playerX, (int)playerY);
+
+ if(distKill < minSwordDistance)
+  {
+    creature3Killed = true;
+    
+    
+  }
+  
+  if(creature3Killed)
+  {
+    
+    remainingtimeDelay3 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature3X = creature3XOrigin;
+      creature3Y = creature3YOrigin;
+      
+      //Creature stops moving
+      creature3VelocityX = 0;
+      creature3VelocityY = 0;
+      
+     killCounter--;
+     
+        //Sets itself back to false
+        creature3Killed = false;
+    
+  }
+
   if (dist3 < minPlatformDistance1)
   {
     creature3VelocityY = 0;
@@ -592,6 +652,34 @@ void creature4(int x, int y, int size)
   creature4X = creature4X + (int)creature4VelocityX;
   creature4Y = creature4Y + (int)creature4VelocityY;
 
+    int distKill = (int)distanceSword((int)creature4X, (int)creature4Y, (int)playerX, (int)playerY);
+
+ if(distKill < minSwordDistance)
+  {
+    creature4Killed = true;
+    
+    
+  }
+  
+  if(creature4Killed)
+  {
+    
+    remainingtimeDelay4 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature4X = creature4XOrigin;
+      creature4Y = creature4YOrigin;
+      
+      //Creature stops moving
+      creature4VelocityX = 0;
+      creature4VelocityY = 0;
+      
+     killCounter--;
+     
+        //Sets itself back to false
+        creature4Killed = false;
+    
+  }
 
   if (creature4Y <= 0)
   {
@@ -619,6 +707,34 @@ void creature5(int x, int y, int size)
   creature5X = creature5X + (int)creature5VelocityX;
   creature5Y = creature5Y + (int)creature5VelocityY;
 
+    int distKill = (int)distanceSword((int)creature5X, (int)creature5Y, (int)playerX, (int)playerY);
+
+ if(distKill < minSwordDistance)
+  {
+    creature5Killed = true;
+    
+    
+  }
+  
+  if(creature5Killed)
+  {
+    
+    remainingtimeDelay5 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature5X = creature5XOrigin;
+      creature5Y = creature5YOrigin;
+      
+      //Creature stops moving
+      creature5VelocityX = 0;
+      creature5VelocityY = 0;
+      
+     killCounter--;
+     
+        //Sets itself back to false
+        creature5Killed = false;
+    
+  }
 
   if (creature5Y <= 0)
   {
@@ -651,6 +767,34 @@ void creature6(int x, int y, int size)
   creature6X = creature6X + (int)creature6VelocityX;
   creature6Y = creature6Y + (int)creature6VelocityY;
 
+    int distKill = (int)distanceSword((int)creature6X, (int)creature6Y, (int)playerX, (int)playerY);
+
+ if(distKill < minSwordDistance)
+  {
+    creature6Killed = true;
+    
+    
+  }
+  
+  if(creature6Killed)
+  {
+    
+    remainingtimeDelay6 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature6X = creature6XOrigin;
+      creature6Y = creature6YOrigin;
+      
+      //Creature stops moving
+      creature6VelocityX = 0;
+      creature6VelocityY = 0;
+      
+     killCounter--;
+     
+        //Sets itself back to false
+        creature6Killed = false;
+    
+  }
 
   if (creature6Y <= 0)
   {
@@ -685,6 +829,35 @@ void creature7(int x, int y, int size)
 
   int dist7 = (int)distancePlatform2((int)creature7X, (int)creature7Y, (int)platform2X+230, (int)platform2Y);
 
+    int distKill = (int)distanceSword((int)creature7X, (int)creature7Y, (int)playerX, (int)playerY);
+
+ if(distKill < minSwordDistance)
+  {
+    creature7Killed = true;
+    
+    
+  }
+  
+  if(creature7Killed)
+  {
+    
+    remainingtimeDelay6 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature7X = creature7XOrigin;
+      creature7Y = creature7YOrigin;
+      
+      //Creature stops moving
+      creature7VelocityX = 0;
+      creature7VelocityY = 0;
+      
+     killCounter--;
+     
+        //Sets itself back to false
+        creature7Killed = false;
+    
+  }
+
   if (dist7 < minPlatformDistance2 + 20)
   {
     creature7VelocityY = 0;
@@ -706,10 +879,6 @@ void creature7(int x, int y, int size)
 
 
 
-
-
-
-
 void creature8(int x, int y, int size)
 {
 
@@ -719,6 +888,35 @@ void creature8(int x, int y, int size)
   creature8Y = creature8Y + (int)creature8VelocityY;
 
   int dist8 = (int)distancePlatform2((int)creature8X, (int)creature8Y, (int)platform2X+230, (int)platform2Y);
+
+    int distKill = (int)distanceSword((int)creature8X, (int)creature8Y, (int)playerX, (int)playerY);
+
+ if(distKill < minSwordDistance)
+  {
+    creature8Killed = true;
+    
+    
+  }
+  
+  if(creature8Killed)
+  {
+    
+    remainingtimeDelay8 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature8X = creature8XOrigin;
+      creature8Y = creature8YOrigin;
+      
+      //Creature stops moving
+      creature8VelocityX = 0;
+      creature8VelocityY = 0;
+      
+     killCounter--;
+     
+        //Sets itself back to false
+        creature8Killed = false;
+    
+  }
 
   if (dist8 < minPlatformDistance2 + 20)
   {
@@ -754,6 +952,35 @@ void creature9(int x, int y, int size)
   creature9Y = creature9Y + (int)creature9VelocityY;
 
   int dist9 = (int)distancePlatform2((int)creature9X, (int)creature9Y, (int)platform2X+230, (int)platform2Y);
+
+    int distKill = (int)distanceSword((int)creature9X, (int)creature9Y, (int)playerX, (int)playerY);
+
+ if(distKill < minSwordDistance)
+  {
+    creature9Killed = true;
+    
+    
+  }
+  
+  if(creature9Killed)
+  {
+    
+    remainingtimeDelay9 = (int)random(120,1200); //Randomizes the time
+       
+       //Creature resets to original position
+       creature9X = creature9XOrigin;
+      creature9Y = creature9YOrigin;
+      
+      //Creature stops moving
+      creature9VelocityX = 0;
+      creature9VelocityY = 0;
+      
+     killCounter--;
+     
+        //Sets itself back to false
+        creature9Killed = false;
+    
+  }
 
   if (dist9 < minPlatformDistance2 + 20)
   {
