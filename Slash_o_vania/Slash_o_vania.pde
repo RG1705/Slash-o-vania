@@ -841,7 +841,7 @@ void creature7(int x, int y, int size)
   if(creature7Killed)
   {
     
-    remainingtimeDelay6 = (int)random(120,1200); //Randomizes the time
+    remainingtimeDelay7 = (int)random(120,1200); //Randomizes the time
        
        //Creature resets to original position
        creature7X = creature7XOrigin;
