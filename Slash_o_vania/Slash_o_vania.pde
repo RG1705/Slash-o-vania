@@ -8,13 +8,15 @@ PImage platL;
 PImage platR;
 PImage swordCursor;
 PImage theCreature;
+PImage winScreen;
+PImage loseScreen;
 
 PFont gothicFont;
 
 int winCounter;  //Total amount of kills to win
 int killCounter = 20; //amount of creatures killed
-int loseCounter = 20; //Total amount of creatures that need to land for a loss
-int deathCounter; //How many creatures have landed
+int loseCounter = 5; //Total amount of creatures that need to land for a loss
+int deathCounter = 1; //How many creatures have landed
 
 
 int playerX; //player's X position
@@ -171,6 +173,9 @@ void setup()
   platR = loadImage("platformR.png");
   swordCursor =loadImage("swordcursor1.png");
   theCreature = loadImage("theCreature1.png");
+  winScreen =loadImage("winScreen.png");
+  loseScreen =loadImage("loseScreen.png");
+  
   gothicFont = loadFont("OldEnglishTextMT-48.vlw");//the counter text font
   textFont(gothicFont);
 }
@@ -200,7 +205,7 @@ void draw()
   fill(255, 200, 0);
   text("Victory = 20 Kills", 850, 215);
   fill(255);
-  text("Loss = 15 missed", 780, 270);
+  text("Loss = 5 missed", 780, 270);
 
   //Makes the timers for each creature decrease every frame
   remainingtimeDelay1--;
@@ -469,6 +474,15 @@ void draw()
   image(theCreature, creature8X-50, creature8Y-25);
   image(theCreature, creature9X-50, creature9Y-25);
   image(town1Sprite, 0, 700, 900, 200);
+  
+        if (killCounter <= 0){
+    image(winScreen,0,0);
+  }
+  
+  if (deathCounter <= 0){
+    image(loseScreen,0,0);
+  }
+ 
 
 }
 
