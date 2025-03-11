@@ -16,7 +16,7 @@ PFont gothicFont;
 int winCounter;  //Total amount of kills to win
 int killCounter = 20; //amount of creatures killed
 int loseCounter = 5; //Total amount of creatures that need to land for a loss
-int deathCounter = 1; //How many creatures have landed
+int deathCounter = 5; //How many creatures have landed
 
 
 int playerX; //player's X position
