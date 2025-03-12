@@ -22,7 +22,7 @@ int deathCounter = 5; //How many creatures have landed
 int playerX; //player's X position
 int playerY;//player's Y position
 int playerSize; //Player's size
-int minSwordDistance = 30; //Minimum distance for sword to hit
+int minSwordDistance = 35; //Minimum distance for sword to hit
 
 //Original X and Y positions of each creature
 int creature1XOrigin = -10;
@@ -472,8 +472,8 @@ void draw()
   image(theCreature, creature6X-50, creature6Y-25);
   image(theCreature, creature7X-50, creature7Y-25);
   image(theCreature, creature8X-50, creature8Y-25);
-  image(theCreature, creature9X-50, creature9Y-25);
-  image(town1Sprite, 0, 700, 900, 200);
+  image(theCreature, creature9X-50, creature9Y-25); 
+  image(town1Sprite, 0, 700, 900, 200); 
   
         if (killCounter <= 0){
     image(winScreen,0,0);
@@ -714,7 +714,7 @@ void creature4(int x, int y, int size)
 void creature5(int x, int y, int size)
 {
 
-  fill(255, 0, 0);
+  fill(255,0,0);
 
   ellipse(x, y, size, size);
   creature5X = creature5X + (int)creature5VelocityX;
@@ -768,7 +768,7 @@ void creature5(int x, int y, int size)
 void creature6(int x, int y, int size)
 {
 
-  fill(255, 0, 0);
+  fill(255,0,0);
 
   ellipse(x, y, size, size);
   creature6X = creature6X + (int)creature6VelocityX;
@@ -844,7 +844,7 @@ void creature7(int x, int y, int size)
   if (creature7Killed)
   {
 
-    remainingtimeDelay6 = (int)random(120, 1200); //Randomizes the time
+    remainingtimeDelay7 = (int)random(120, 1200); //Randomizes the time
 
     //Creature resets to original position
     creature7X = creature7XOrigin;
@@ -884,7 +884,7 @@ void creature7(int x, int y, int size)
 void creature8(int x, int y, int size)
 {
 
-  fill(255, 0, 0);
+  fill(255,0,0);
 
   ellipse(x, y, size, size);
   creature8X = creature8X - (int)creature8VelocityX;
@@ -942,7 +942,7 @@ void creature8(int x, int y, int size)
 void creature9(int x, int y, int size)
 {
 
-  fill(2550, 0);
+  fill(255, 0,0);
 
   ellipse(x, y, size, size);
 
