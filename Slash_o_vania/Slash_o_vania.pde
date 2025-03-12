@@ -477,17 +477,20 @@ void draw()
   
         if (killCounter <= 0){
     image(winScreen,0,0);
+    
+    deathCounter++;
   }
   
   if (deathCounter <= 0){
     image(loseScreen,0,0);
+    killCounter++;
   }
  
 
 }
 
 
-//creatureN creation function
+//creatureN creation functions
 void creature1(int x, int y, int size)
 {
   fill(255, 0, 0);
