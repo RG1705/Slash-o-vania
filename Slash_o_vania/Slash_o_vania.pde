@@ -172,7 +172,7 @@ void setup()
   theCreature = loadImage("theCreature1.png");
   winScreen =loadImage("winScreen.png");
   loseScreen =loadImage("loseScreen.png");
-  
+
   gothicFont = loadFont("OldEnglishTextMT-48.vlw");//the counter text font
   textFont(gothicFont);
 }
@@ -460,7 +460,7 @@ void draw()
   playerX = mouseX;
   playerY = 450;
   image(swordCursor, playerX, playerY);
-  
+
   image(theCreature, creature1X-50, creature1Y-25); //adds the creature images over the ellipses being collided with
   image(theCreature, creature2X-50, creature2Y-25);
   image(theCreature, creature3X-50, creature3Y-25);
@@ -469,21 +469,20 @@ void draw()
   image(theCreature, creature6X-50, creature6Y-25);
   image(theCreature, creature7X-50, creature7Y-25);
   image(theCreature, creature8X-50, creature8Y-25);
-  image(theCreature, creature9X-50, creature9Y-25); 
-  image(town1Sprite, 0, 700, 900, 200); 
-  
-        if (killCounter <= 0){
-    image(winScreen,0,0);
-    
-    deathCounter++;
-  }
-  
-  if (deathCounter <= 0){
-    image(loseScreen,0,0);
-    killCounter++;
-  }
- 
+  image(theCreature, creature9X-50, creature9Y-25);
+  image(town1Sprite, 0, 700, 900, 200);
 
+  //If the kill counter reaches zero, the player wins
+  if (killCounter <= 0) {
+    image(winScreen, 0, 0);
+    deathCounter++; //Prevents lose screen from triggering
+  }
+
+  //If death counter reaches 0, the player loses
+  if (deathCounter <= 0) {
+    image(loseScreen, 0, 0);
+    killCounter++; //prevents the win screen from triggering
+  }
 }
 
 
@@ -714,7 +713,7 @@ void creature4(int x, int y, int size)
 void creature5(int x, int y, int size)
 {
 
-  fill(255,0,0);
+  fill(255, 0, 0);
 
   ellipse(x, y, size, size);
   creature5X = creature5X + (int)creature5VelocityX;
@@ -768,7 +767,7 @@ void creature5(int x, int y, int size)
 void creature6(int x, int y, int size)
 {
 
-  fill(255,0,0);
+  fill(255, 0, 0);
 
   ellipse(x, y, size, size);
   creature6X = creature6X + (int)creature6VelocityX;
@@ -884,7 +883,7 @@ void creature7(int x, int y, int size)
 void creature8(int x, int y, int size)
 {
 
-  fill(255,0,0);
+  fill(255, 0, 0);
 
   ellipse(x, y, size, size);
   creature8X = creature8X - (int)creature8VelocityX;
@@ -942,7 +941,7 @@ void creature8(int x, int y, int size)
 void creature9(int x, int y, int size)
 {
 
-  fill(255, 0,0);
+  fill(255, 0, 0);
 
   ellipse(x, y, size, size);
 
@@ -999,7 +998,7 @@ void creature9(int x, int y, int size)
 
 
 
-
+//Distance code for the left platform
 
 float distancePlatform1(int x1, int y1, int x2, int y2)
 {
@@ -1010,7 +1009,7 @@ float distancePlatform1(int x1, int y1, int x2, int y2)
 
   return sqrt((XDist*XDist)+(YDist * YDist));
 }
-
+//Distance Code for the right platform
 float distancePlatform2(int x1, int y1, int x2, int y2)
 {
 
@@ -1020,7 +1019,7 @@ float distancePlatform2(int x1, int y1, int x2, int y2)
 
   return sqrt((XDist*XDist)+(YDist * YDist));
 }
-
+//Distance code for the sword
 float distanceSword(int x1, int y1, int x2, int y2)
 {
 
