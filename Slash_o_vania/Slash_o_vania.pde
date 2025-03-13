@@ -158,9 +158,6 @@ boolean creature7Killed;
 boolean creature8Killed;
 boolean creature9Killed;
 
-PFont PlayerStat;
-PFont CreatureStat;
-
 void setup()
 {
   size(900, 900);
