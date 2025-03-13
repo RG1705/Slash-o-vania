@@ -13,9 +13,9 @@ PImage loseScreen;
 
 PFont gothicFont;
 
-int winCounter;  //Total amount of kills to win
+//int winCounter;  //Total amount of kills to win
 int killCounter = 20; //amount of creatures killed
-int loseCounter = 5; //Total amount of creatures that need to land for a loss
+//int loseCounter = 5; //Total amount of creatures that need to land for a loss
 int deathCounter = 5; //How many creatures have landed
 
 
@@ -203,9 +203,9 @@ void draw()
   int center=900/2;
   text("Foes Remaining:"+killCounter, center, 65);
   fill(255, 200, 0);
-  text("Victory = 20 Kills", 850, 215);
+  text("Victory = 20 Kills", 850, 215); //displays the win condition on the side of the window
   fill(255);
-  text("Loss = 5 missed", 780, 270);
+  text("Loss = 5 missed", 780, 270); //displays the loss condition on the side of the window
 
   //Makes the timers for each creature decrease every frame
   remainingtimeDelay1--;
@@ -464,7 +464,7 @@ void draw()
   playerY = 450;
   image(swordCursor, playerX, playerY);
   
-  image(theCreature, creature1X-50, creature1Y-25); //adds the creature images over the circle being collided with
+  image(theCreature, creature1X-50, creature1Y-25); //adds the creature images over the ellipses being collided with
   image(theCreature, creature2X-50, creature2Y-25);
   image(theCreature, creature3X-50, creature3Y-25);
   image(theCreature, creature4X-50, creature4Y-25);
