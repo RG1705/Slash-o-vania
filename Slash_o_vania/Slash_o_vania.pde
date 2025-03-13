@@ -1,4 +1,4 @@
-
+//By Rafael and Thea of SwordSpear Productions!
 
 PImage town1Sprite;
 PImage town2Sprite;
@@ -181,15 +181,15 @@ void draw()
 {
 
 
-  noCursor();
-  image(backgroundSprite, 0, 0, 900, 900);
-  image(moonSprite, 370, 90, 150, 150);
-  image(town2Sprite, 0, 700, 900, 200);
+  noCursor(); //gets rid of the cursor
+  image(backgroundSprite, 0, 0, 900, 900); // places the background image
+  image(moonSprite, 370, 90, 150, 150); // places the moon image
+  image(town2Sprite, 0, 700, 900, 200); //places the back row of houses
   fill(255);
-  rect(platform1X, platform1Y, 200, 50);
-  rect(platform2X, platform2Y, 200, 50);
+  rect(platform1X, platform1Y, 200, 50); //places platform1
+  rect(platform2X, platform2Y, 200, 50); //laces platform2
 
-  image(swordCursor, mouseX, 450);
+  image(swordCursor, mouseX, 450); //sets the location of the sword image at mouse X
   image(platR, 700, 90); //adds overlay platform on right
   image(platL, 0, 90); //adds overlay platform on left
 
